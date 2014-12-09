@@ -37,15 +37,20 @@ class FuzzyServer {
     return new FuzzyAgent($id, $this);
   }
   public function post($rel, $payload) {
-    $req = new HttpRequest($this->root.$rel, HTTP_METH_POST);
-    $req->addHeaders(array("Authorization" => "Bearer $this->key",
-                           "Content-Type" => "application/json"));
-    $req->setBody(json_encode($payload));
-    $msg = $req->send();
-    if ($msg->getResponseCode() == 200) {
-      return json_decode($msg->getBody());
-    } else {
-      return null;
+    $ch = curl_init();
+    curl_setopt_array($ch, array(
+      CURLOPT_CUSTOMREQUEST => "POST",
+      CURLOPT_URL => $this->root.$rel,
+      CURLOPT_POSTFIELDS => json_encode($payload),
+      CURLOPT_HTTPHEADER => array("Authorization: Bearer $this->key",
+                                  "Content-Type: application/json"),
+      CURLOPT_RETURNTRANSFER => TRUE));
+    $body = curl_exec($ch);
+    $results = NULL;
+    if ($body) {
+      $results = json_decode($body);
     }
+    curl_close($ch);
+    return $results;
   }
 }
