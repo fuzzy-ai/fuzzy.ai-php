@@ -12,6 +12,8 @@
  *  http://www.apache.org/licenses/LICENSE-2.0
  */
 
+ $fuzzy_io_php_version = "0.1.0";
+
 /**
  * FuzzyAgent -- an agent that can make decisions
  */
