@@ -4,7 +4,6 @@ require_once './TwitterAPIExchange.php';
 require_once './config.php';
 
 require_once '../../vendor/autoload.php';
-use FuzzyAi\Client;
 
 function byID($a, $b)
 {
@@ -54,7 +53,7 @@ function orderByRelevance($tweets)
 {
     global $apiKey, $agentID;
 
-    $client = new Client($apiKey);
+    $client = new FuzzyAi\Client($apiKey);
 
 
     foreach ($tweets as $tweet) {
