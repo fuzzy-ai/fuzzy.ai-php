@@ -1,2 +1,7 @@
-examples/config.php
-examples/social-example.html
+config.php
+
+.DS_Store
+
+# PHP / composer
+composer.lock
+/vendor/

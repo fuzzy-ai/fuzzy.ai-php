@@ -1,0 +1,28 @@
+{
+  "name": "fuzzy-ai/sdk",
+  "description": "Fuzzy.ai PHP Library",
+  "keywords": [
+    "fuzzy",
+    "ai",
+    "api"
+  ],
+  "homepage": "https://fuzzy.ai",
+  "licence": "Apache v2",
+  "authors": [
+    {
+      "name": "Fuzzy.ai",
+      "homepage": "https://github.com/fuzzy-ai/fuzzy.ai-php"
+    }
+  ],
+  "require": {
+    "php": ">=5.3.3",
+    "ext-curl": "*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~4.0",
+    "squizlabs/php_codesniffer": "~2.0"
+  },
+  "autoload": {
+    "psr-4": { "FuzzyAi\\": "lib/" }
+  }
+}
