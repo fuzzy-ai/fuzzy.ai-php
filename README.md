@@ -1,5 +1,10 @@
 # Fuzzy.ai PHP SDK
 
+[![Build Status](https://travis-ci.org/fuzzy-ai/fuzzy.ai-php.svg?branch=master)](https://travis-ci.org/fuzzy-ai/fuzzy.ai-php)
+[![Latest Stable Version](https://poser.pugx.org/fuzzy-ai/sdk/v/stable.svg)](https://packagist.org/packages/fuzzy-ai/sdk)
+[![Total Downloads](https://poser.pugx.org/fuzzy-ai/sdk/downloads.svg)](https://packagist.org/packages/fuzzy-ai/sdk)
+[![License](https://poser.pugx.org/fuzzy-ai/sdk/license.svg)](https://packagist.org/packages/fuzzy-ai/sdk)
+
 PHP library for accessing the fuzzy.ai API.
 
 ## Requirements
