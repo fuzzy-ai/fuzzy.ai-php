@@ -5,6 +5,8 @@
 
 namespace FuzzyAi;
 
+use FuzzyAi\Exceptions\ApiException;
+
 /**
  * Client class
  *
@@ -69,6 +71,9 @@ class Client
     {
         $path = '/agent/' . $agentId;
         list($response, $code, $headers) = $this->request('POST', $path, $inputs);
+        if ($code != 200) {
+            throw new ApiException($response->message, $code);
+        }
         return array($response, $headers['X-Evaluation-ID']);
     }
 
@@ -79,7 +84,9 @@ class Client
     {
         $path = '/evaluation/' . $evaluationId . '/feedback';
         list($response, $code, $headers) = $this->request('POST', $path, $performance);
-
+        if ($code != 200) {
+            throw new ApiException($response->message, $code);
+        }
         return $response;
     }
 
