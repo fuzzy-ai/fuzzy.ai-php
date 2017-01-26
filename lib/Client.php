@@ -6,6 +6,7 @@
 namespace FuzzyAi;
 
 use FuzzyAi\Exceptions\ApiException;
+use FuzzyAi\Agent;
 
 /**
  * Client class
@@ -46,7 +47,7 @@ class Client
         $this->root = $root;
     }
 
-    public function setHttpClient($client)
+    public function setHttpClient(HttpClientInterface $client)
     {
         $this->httpClient = $client;
     }
@@ -69,12 +70,10 @@ class Client
      */
     public function evaluate($agentId, array $inputs)
     {
-        $path = '/agent/' . $agentId;
-        list($response, $code, $headers) = $this->request('POST', $path, $inputs);
-        if ($code != 200) {
-            throw new ApiException($response->message, $code);
-        }
-        return array($response, $headers['X-Evaluation-ID']);
+        $agent = new Agent($this);
+        $agent->id = $agentId;
+        $evaluation = $agent->evaluate($inputs);
+        return array($evaluation->outputs, $evaluation->id);
     }
 
     /**
@@ -82,15 +81,36 @@ class Client
      */
     public function feedback($evaluationId, array $performance)
     {
-        $path = '/evaluation/' . $evaluationId . '/feedback';
-        list($response, $code, $headers) = $this->request('POST', $path, $performance);
-        if ($code != 200) {
-            throw new ApiException($response->message, $code);
-        }
-        return $response;
+        $eval = new Evaluation($this);
+        $eval->id = $evaluationId;
+        return $eval->feedback($performance);
     }
 
-    protected function request($method, $path, $params)
+    /**
+     * getAgent
+     *
+     * @param $agentId ID of the agent to retrieve.
+     */
+    public function getAgent($agentId)
+    {
+        $agent = new Agent($this);
+        $agent->read($agentId);
+
+        return $agent;
+    }
+
+    /**
+     * newAgent
+     */
+    public function newAgent($props)
+    {
+        $agent = new Agent($this);
+        $agent->create($props);
+
+        return $agent;
+    }
+
+    public function request($method, $path, $params = array())
     {
         $headers = array(
             'Content-Type' => 'application/json',

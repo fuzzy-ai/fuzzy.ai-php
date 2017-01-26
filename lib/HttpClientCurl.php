@@ -21,7 +21,7 @@ class HttpClientCurl implements HttpClientInterface
 
         $ch = curl_init();
         curl_setopt_array($ch, array(
-          CURLOPT_CUSTOMREQUEST => "POST",
+          CURLOPT_CUSTOMREQUEST => $method,
           CURLOPT_URL => $url,
           CURLOPT_POSTFIELDS => json_encode($params),
           CURLOPT_HTTPHEADER => $requestHeaders,

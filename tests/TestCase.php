@@ -31,4 +31,35 @@ class TestCase extends \PHPUnit_Framework_TestCase
         $this->client = new Client();
         $this->client->setHttpClient($this->setUpMockClient());
     }
+
+    protected function agentResponse()
+    {
+        $response = new \stdClass();
+        $response->id = 'testId';
+        $response->inputs = array();
+        $response->outputs = array();
+        $response->rules = array();
+
+        return $response;
+    }
+
+    protected function evaluationResponse()
+    {
+        $response = new \stdClass();
+        $response->reqID = 'testEvalId';
+        $response->input = array();
+        $response->crisp = array();
+
+        return $response;
+    }
+
+    protected function feedbackResponse()
+    {
+        $response = new \stdClass();
+        $response->id = 'testFeedbackId';
+        $response->data = array();
+
+        return $response;
+
+    }
 }
