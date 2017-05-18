@@ -19,7 +19,7 @@ class Client
     /**
      * @const string SDK version number
      */
-    const VERSION = '0.3.0';
+    const VERSION = '0.3.1';
 
     /**
      * @var key
